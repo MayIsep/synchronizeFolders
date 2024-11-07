@@ -1,0 +1,35 @@
+# Ignore build output directories
+bin/
+obj/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userprefs
+
+# Logs
+*.log
+
+# Configuration files
+appsettings*.json
+
+# ASP.NET temporary files
+.vs/
+.idea/
+
+# Rider project files
+.idea/
+
+# Visual Studio Code settings
+.vscode/
+
+# Temporary files
+*~
+
+# macOS files
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db
+ehthumbs.db

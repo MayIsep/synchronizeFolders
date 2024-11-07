@@ -10,3 +10,11 @@ folder;
 console output;
 - Folder paths, synchronization interval and log file path should be provided using
 the command line arguments;
+
+# How to run the app
+To run the app open the Powershell command line in the project's folder (synchronizeFolders) and type the following commands:
+
+    cd synchronizeFoldersApp
+    dotnet build
+    # replace the examples next to dotnet run for the actual arguments
+    dotnet run SourceFolderPath ReplicaFolderPath TimeInterval LogFilePath
