@@ -46,6 +46,9 @@ public class FolderSynchronization {
     private void CopyFiles(string sourceFolder, string replicaFolder){
 
         foreach(string filePath in Directory.GetFiles(sourceFolder)){
+            // when the contents of a folder inside the source folder need to be copied, the folder needs to be created before copying
+            if(!Directory.Exists(replicaFolder))    
+                Directory.CreateDirectory(replicaFolder);
             this.CopyFile(filePath, filePath.Replace(sourceFolder, replicaFolder));
         }
 
@@ -66,11 +69,15 @@ public class FolderSynchronization {
                 this.DeleteFile(filePath);
         }
 
-        // call recursively for subFolders, adding to the source path the new folder
-        string [] subFolders = Directory.GetDirectories(replicaFolder);
-        foreach(string folder in subFolders)
-            DeleteFiles(folder, folder.Replace(replicaFolder, sourceFolder)); 
-
+        // if folder exists in replica but not in source, then it was deleted from source and should be deleted in replica
+        if(!Directory.Exists(sourceFolder))
+            Directory.Delete(replicaFolder);
+        else{
+            // call recursively for subFolders, adding to the source path the new folder
+            string [] subFolders = Directory.GetDirectories(replicaFolder);
+            foreach(string folder in subFolders)
+                DeleteFiles(folder.Replace(replicaFolder, sourceFolder), folder); 
+        }
     }
 
 
